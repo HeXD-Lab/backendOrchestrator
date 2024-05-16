@@ -29,7 +29,8 @@ warnings.filterwarnings("ignore")
 
 videoName="front"
 # videoFolder =  "C:\\Users\\Abbas\\Desktop\\mlStuff\\rasd\\demo"
-videoFolder =  "C:\\Users\\Abbas\\backendOrchestrator\\demo"
+# videoFolder =  "C:\\Users\\Abbas\\backendOrchestrator\\demo"
+videoFolder =  "C:\\Users\\Spher\\Desktop\\sound\\backendOrchestrator\\demo"
 pretrainModel = "model_0025.model"
 
 nDataLoaderThread = 10
