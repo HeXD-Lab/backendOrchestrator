@@ -25,13 +25,12 @@ def index(request):
 def processFile(request):
     
     # Save file to local
-    filename = ""
+    timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")  # Format: YYYYMMDDHHMMSS
+    filename = "data_" + timestamp + ".mp4"
     if request.method == 'POST':
         file = request.FILES['file']
         print("filename: ", request.FILES['file'].name)
-        timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")  # Format: YYYYMMDDHHMMSS
-        filename = "data_" + timestamp + ".mp4"
-
+        
         filePath = os.path.join(settings.BASE_DIR, "demo", filename)
         print("filePath: ", filePath)
         with open(filePath, 'wb+') as destination:
