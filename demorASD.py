@@ -171,6 +171,7 @@ def inference_video():
 	flist.sort()
 	dets = []
 	for fidx, fname in enumerate(flist):
+		# if fidx % 2 != 0: continue
 		image = cv2.imread(fname)
 		imageNumpy = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 		bboxes = DET.detect_faces(imageNumpy, conf_th=0.9, scales=[facedetScale])
@@ -627,7 +628,7 @@ def visualization(tracks, labels):
 			cv2.putText(image, "subs subs subs subs subs", (int(face['x']-face['s']), int(face['y']+face['s'])), cv2.FONT_HERSHEY_SIMPLEX, 1.5, (0,clr,255-clr),5)
 		vOut.write(image)
 	print("#############################################")
-	print('faces ', faces[-2])
+	print('faces ', faces)
 	print("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^")
 	vOut.release()
 	command = ("ffmpeg -y -i %s -i %s -threads %d -c:v copy -c:a copy %s -loglevel panic" % \
@@ -635,7 +636,13 @@ def visualization(tracks, labels):
 		nDataLoaderThread, os.path.join(pyaviPath,'video_out.avi'))) 
 	output = subprocess.call(command, shell=True, stdout=None)
 
-	return faces[-2]
+	# return last frame with face
+	for i in range(len(faces) - 1, -1, -1):
+		if faces[i] != []:
+			faceObj = faces[i][0]
+			return str(faceObj["s"]) + "," + str(faceObj["x"]) + "," + str(faceObj["y"])
+
+	return faces
 
 	
 
@@ -894,6 +901,8 @@ def main(fileName="front"):
 		"faces": faces,
 		"captions": captions
 	}
+
+	print('response: ', response)
 
 	sys.stderr.write(time.strftime("%Y-%m-%d %H:%M:%S") + " Done \r\n")
 
