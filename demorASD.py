@@ -5,6 +5,7 @@ from shutil import rmtree
 from scipy.io import wavfile
 from scipy.interpolate import interp1d
 from sklearn.metrics import accuracy_score, f1_score
+import pandas as pd
 
 from scenedetect.video_manager import VideoManager
 from scenedetect.scene_manager import SceneManager
