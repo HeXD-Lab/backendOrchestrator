@@ -1,6 +1,6 @@
 # Repository for our work "rASD: Robust Active Speaker Detection in Noisy Environments"
 
-## Dataset
+## Setup
 
 Create anaconda environment from anacondaEnv.yaml
 
